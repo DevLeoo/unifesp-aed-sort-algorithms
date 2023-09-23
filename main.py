@@ -103,7 +103,7 @@ st.markdown(
     
     OBS: Todas as implementações nas diferentes linguagens assim como os arquivos
     que geraram os dados constam em anexo na pasta zipada codigos.zip ou no seguinte 
-    endereço: LINK DO GITHUB AQUI
+    endereço: https://github.com/DevLeoo/unifesp-aed-sort-algorithms
     """
 )
 
