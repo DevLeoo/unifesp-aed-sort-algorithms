@@ -6,6 +6,6 @@ Foi criado uma página web utilizando a biblioteca Streamlit do python.
 # Como rodar o projeto:
 1. Clone o repositório do projeto
 2. Na pasta raiz, rode **pip install -r requirements.txt**
-3. Ainda na raiz do projeto, após a instalação dos pacotes, execute no terminal **streamlit run main.py**
+3. Ainda na raiz do projeto, após a instalação dos pacotes, execute no terminal **streamlit run main.py** ou **make start**
 
 Assim o programa já estará rodando e uma página Web será aberta contendo a documentação do projeto
