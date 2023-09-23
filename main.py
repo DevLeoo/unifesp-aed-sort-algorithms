@@ -1,6 +1,16 @@
 # import packages
-import streamlit as st
 import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
+
+from Results.selectionSort import (
+    c, c_almost_sorted, c_inverse,
+    java, java_inverse, java_almost_sorted,
+    python, python_inverse, python_almost_sorted,
+    typescript, typescript_inverse, typescript_almost_sorted
+)
+
 
 st.set_page_config(page_title='Sort Algorithms', page_icon="🦾", layout='centered', initial_sidebar_state='auto')
 
@@ -37,9 +47,10 @@ st.markdown(
     
     Cenários: 
     1. Números inteiros/reais aleatórios;
-    2. Números inteiros/reais aleatórios 95% ordenados;
-    3. Números inteiros/reais aleatórios em ordem decrescente;
+    2. Números inteiros/reais aleatórios em ordem decrescente;
+    3. Números inteiros/reais aleatórios 95% ordenados;
     
+
     Tamanho das entradas (quantidade de dados):
     1. 1000;
     2. 10000;
@@ -52,7 +63,7 @@ st.subheader("Ambiente Computacional")
 
 st.markdown(
     """ Os algoritmos foram executados em uma máquina linux com as seguintes configurações: 
-   
+    
     **Versões**
     
     * Ubuntu: 22.04.3
@@ -88,14 +99,143 @@ st.markdown(
     
     * SODIMM 4GB DDR4 2133 MT/s 1.2 V
     * SODIMM 16GB DDR4 2133 MT/s 1.2 V
+    
+    
+    OBS: Todas as implementações nas diferentes linguagens assim como os arquivos
+    que geraram os dados constam em anexo na pasta zipada codigos.zip ou no seguinte 
+    endereço: LINK DO GITHUB AQUI
     """
 )
 
+
+def modified_min_max_scaling(column):
+    min_val = column.min()
+    max_val = column.max()
+    range_val = max_val - min_val
+    if range_val == 0:
+        return column
+    scaled_column = (column - min_val) / range_val
+    return scaled_column
+
+
+def normalize(df: pd.DataFrame) -> pd.DataFrame:
+    return df.apply(modified_min_max_scaling)
+
+
+def print_chart(df: pd.DataFrame):
+    # scaler = MinMaxScaler()
+    # normalized = scaler.fit_transform(df)
+    # normalized_df = pd.DataFrame(normalized, columns=df.columns)
+
+    fig, ax = plt.subplots()
+    #  normalized_df.plot(kind="bar", rot=0, ax=ax)
+    normalized_df = normalize(df)
+    normalized_df.plot(kind="bar", rot=0, ax=ax)
+    ax.set_xlabel("Repetitions")
+    ax.set_ylabel("Execution Time")
+    ax.legend(title="Data Size")
+    st.markdown("Dados coletados")
+    st.dataframe(df)
+    st.markdown("Descrição estatística")
+    st.dataframe(df.describe())
+    st.pyplot(fig)
+
+
+def print_comparative(amount: str):
+    # Create a Matplotlib figure and axis
+    plt.figure(figsize=(10, 6))
+
+    # Plot the data from each DataFrame as lines
+    plt.plot(c[amount],  label='C')
+    plt.plot(java[amount], label='Java')
+    plt.plot(python[amount], label='Python')
+    plt.plot(typescript[amount],  label='Typescript')
+
+    # Add labels, title, and legend
+    plt.xlabel('X-axis')
+    plt.ylabel('Y-axis')
+    plt.title(f"Tempo de execução das linguagens para {amount} entradas")
+    plt.legend()
+
+    # Show the plot
+    plt.grid(True)
+    st.pyplot(plt)
+
+
 st.header("Resultados")
+st.markdown(
+    """
+        Todos os valores apresentados estão na grandeza de milisegundos.
+        
+        Dicionário de dados para as tabelas.
+        
+        Tabela de Dados Coletados:
+        * first: primeira execução
+        * second: segunda execução
+        * third: terceira execução
+        As colunas se referem à quantidade de dados.
+        
+        
+        Tabela de Descrições estatísticas:
+        * count: Quantidade de dados
+        * mean: Média do valores
+        * std: Desvio padrão
+        * min: Mínimo dos valores
+        * 25%: Percentil 25
+        * 50%: Percentil 50
+        * 75%: Percentil 75
+        * max: Máximo dos valores
+        
+    """
+)
 
-st.subheader("C")
-st.subheader("Java")
-st.subheader("Python")
-st.subheader("Typescript")
+st.title("C")
 
-st.header("Comparativo")
+st.subheader("Cenário 1:")
+
+print_chart(c)
+
+st.subheader("Cenário 2:")
+
+print_chart(c_inverse)
+
+st.subheader("Cenário 3:")
+
+print_chart(c_almost_sorted)
+
+st.title("Java")
+st.subheader("Cenário 1:")
+print_chart(java)
+
+st.subheader("Cenário 2:")
+print_chart(java_inverse)
+
+st.subheader("Cenário 3:")
+print_chart(java_almost_sorted)
+
+st.title("Python")
+st.subheader("Cenário 1:")
+print_chart(python)
+
+st.subheader("Cenário 2:")
+print_chart(python_inverse)
+
+st.subheader("Cenário 3:")
+print_chart(python_almost_sorted)
+
+st.title("Typescript")
+st.subheader("Cenário 1:")
+print_chart(typescript)
+
+st.subheader("Cenário 2:")
+print_chart(typescript_inverse)
+
+st.subheader("Cenário 3:")
+print_chart(typescript_almost_sorted)
+
+st.title("Comparativo")
+
+print_comparative("1000")
+print_comparative("10000")
+print_comparative("100000")
+print_comparative("1000000")
