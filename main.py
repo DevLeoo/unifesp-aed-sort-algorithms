@@ -156,15 +156,21 @@ def print_chart(df: pd.DataFrame):
     plt.close()
 
 
-def print_comparative(amount: str):
+def print_comparative(
+      df_c: pd.DataFrame,
+      df_java: pd.DataFrame,
+      df_python: pd.DataFrame,
+      df_type: pd.DataFrame,
+      amount: str
+):
     # Create a Matplotlib figure and axis
     plt.figure(figsize=(10, 6))
 
     # Plot the data from each DataFrame as lines
-    plt.plot(c[amount],  label='C')
-    plt.plot(java[amount], label='Java')
-    plt.plot(python[amount], label='Python')
-    plt.plot(typescript[amount],  label='Typescript')
+    plt.plot(df_c[amount],  label='C')
+    plt.plot(df_java[amount], label='Java')
+    plt.plot(df_python[amount], label='Python')
+    plt.plot(df_type[amount],  label='Typescript')
 
     # Add labels, title, and legend
     plt.xlabel('X-axis')
@@ -331,7 +337,61 @@ print_chart(type_counting_almost_sorted)
 
 st.title("Comparativo")
 
-print_comparative("1000")
-print_comparative("10000")
-print_comparative("100000")
-print_comparative("1000000")
+st.title("Selection Sort")
+
+st.subheader("Cenário 1")
+print_comparative(c, java, python, typescript, "1000")
+print_comparative(c, java, python, typescript, "10000")
+print_comparative(c, java, python, typescript, "100000")
+print_comparative(c, java, python, typescript, "1000000")
+
+st.subheader("Cenário 2")
+print_comparative(c_inverse, java_inverse, python_inverse, typescript_inverse, "1000")
+print_comparative(c_inverse, java_inverse, python_inverse, typescript_inverse,  "10000")
+print_comparative(c_inverse, java_inverse, python_inverse, typescript_inverse,  "100000")
+print_comparative(c_inverse, java_inverse, python_inverse, typescript_inverse,  "1000000")
+
+st.subheader("Cenário 3")
+print_comparative(c_almost_sorted, java_almost_sorted, python_almost_sorted, typescript_almost_sorted, "1000")
+print_comparative(c_almost_sorted, java_almost_sorted, python_almost_sorted, typescript_almost_sorted,  "10000")
+print_comparative(c_almost_sorted, java_almost_sorted, python_almost_sorted, typescript_almost_sorted,  "100000")
+print_comparative(c_almost_sorted, java_almost_sorted, python_almost_sorted, typescript_almost_sorted, "1000000")
+
+
+st.title("Quick Sort")
+st.subheader("Cenário 1:")
+print_comparative(c_quick, java_quick, python_quick, type_quick, "1000")
+print_comparative(c_quick, java_quick, python_quick, type_quick, "10000")
+print_comparative(c_quick, java_quick, python_quick, type_quick, "100000")
+print_comparative(c_quick, java_quick, python_quick, type_quick, "1000000")
+
+st.subheader("Cenário 2:")
+print_comparative(c_quick_inverse, java_quick_inverse, python_quick_inverse, type_quick_inverse, "1000")
+print_comparative(c_quick_inverse, java_quick_inverse, python_quick_inverse, type_quick_inverse, "10000")
+print_comparative(c_quick_inverse, java_quick_inverse, python_quick_inverse, type_quick_inverse, "100000")
+print_comparative(c_quick_inverse, java_quick_inverse, python_quick_inverse, type_quick_inverse, "1000000")
+
+st.subheader("Cenário 3:")
+print_comparative(c_quick_almost_sorted, java_quick_almost_sorted, python_quick_almost_sorted, type_quick_almost_sorted, "1000")
+print_comparative(c_quick_almost_sorted, java_quick_almost_sorted, python_quick_almost_sorted, type_quick_almost_sorted, "10000")
+print_comparative(c_quick_almost_sorted, java_quick_almost_sorted, python_quick_almost_sorted, type_quick_almost_sorted, "100000")
+print_comparative(c_quick_almost_sorted, java_quick_almost_sorted, python_quick_almost_sorted, type_quick_almost_sorted, "1000000")
+
+st.title("Counting Sort")
+st.subheader("Cenário 1:")
+print_comparative(c_counting, java_counting, python_counting, type_counting, "1000")
+print_comparative(c_counting, java_counting, python_counting, type_counting, "10000")
+print_comparative(c_counting, java_counting, python_counting, type_counting, "100000")
+print_comparative(c_counting, java_counting, python_counting, type_counting, "1000000")
+
+st.subheader("Cenário 2:")
+print_comparative(c_counting_inverse, java_counting_inverse, python_counting_inverse, type_counting_inverse, "1000")
+print_comparative(c_counting_inverse, java_counting_inverse, python_counting_inverse, type_counting_inverse, "10000")
+print_comparative(c_counting_inverse, java_counting_inverse, python_counting_inverse, type_counting_inverse, "100000")
+print_comparative(c_counting_inverse, java_counting_inverse, python_counting_inverse, type_counting_inverse, "1000000")
+
+st.subheader("Cenário 3:")
+print_comparative(c_counting_almost_sorted, java_counting_almost_sorted, python_counting_almost_sorted, type_counting_almost_sorted, "1000")
+print_comparative(c_counting_almost_sorted, java_counting_almost_sorted, python_counting_almost_sorted, type_counting_almost_sorted, "10000")
+print_comparative(c_counting_almost_sorted, java_counting_almost_sorted, python_counting_almost_sorted, type_counting_almost_sorted, "100000")
+print_comparative(c_counting_almost_sorted, java_counting_almost_sorted, python_counting_almost_sorted, type_counting_almost_sorted, "1000000")
