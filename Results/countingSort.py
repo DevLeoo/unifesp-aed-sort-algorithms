@@ -1,5 +1,5 @@
 import pandas as pd
-from selectionSort import df_index
+from Results.selectionSort import df_index
 
 c = pd.DataFrame({
     "1000": [0.1, 0.09, 0.09],
@@ -36,7 +36,7 @@ java_inverse = pd.DataFrame({
     "1000000": [545, 594, 589]
 }, df_index)
 
-java_almost_ordered = pd.DataFrame({
+java_almost_sorted = pd.DataFrame({
     "1000": [50, 29, 61],
     "10000": [79, 70, 59],
     "100000": [211, 191, 198],
@@ -57,7 +57,7 @@ python_inverse = pd.DataFrame({
     "1000000": [380, 369, 377]
 }, df_index)
 
-python_almost_ordered = pd.DataFrame({
+python_almost_sorted = pd.DataFrame({
     "1000": [0.378, 0.345, 0.347],
     "10000": [3, 3, 3],
     "100000": [38, 37, 38],
@@ -78,7 +78,7 @@ typescript_inverse = pd.DataFrame({
     "1000000": [0, 0, 0]
 }, df_index)
 
-typescript_almost_ordered = pd.DataFrame({
+typescript_almost_sorted = pd.DataFrame({
     "1000": [11, 1, 3],
     "10000": [4, 4, 6],
     "100000": [11, 12, 16],

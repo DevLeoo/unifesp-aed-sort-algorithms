@@ -2,13 +2,26 @@
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import MinMaxScaler
 
 from Results.selectionSort import (
     c, c_almost_sorted, c_inverse,
     java, java_inverse, java_almost_sorted,
     python, python_inverse, python_almost_sorted,
     typescript, typescript_inverse, typescript_almost_sorted
+)
+
+from Results.quickSort import (
+    c as c_quick, c_almost_sorted as c_quick_almost_sorted, c_inverse as c_quick_inverse,
+    java as java_quick, java_inverse as java_quick_inverse, java_almost_sorted as java_quick_almost_sorted,
+    python as python_quick, python_inverse as python_quick_inverse, python_almost_sorted as python_quick_almost_sorted,
+    typescript as type_quick, typescript_inverse as type_quick_inverse, typescript_almost_sorted as type_quick_almost_sorted
+)
+
+from Results.countingSort import (
+    c as c_counting, c_almost_sorted as c_counting_almost_sorted, c_inverse as c_counting_inverse,
+    java as java_counting, java_inverse as java_counting_inverse, java_almost_sorted as java_counting_almost_sorted,
+    python as python_counting, python_inverse as python_counting_inverse, python_almost_sorted as python_counting_almost_sorted,
+    typescript as type_counting, typescript_inverse as type_counting_inverse, typescript_almost_sorted as type_counting_almost_sorted
 )
 
 
@@ -140,6 +153,8 @@ def print_chart(df: pd.DataFrame):
     st.dataframe(df.describe())
     st.pyplot(fig)
 
+    plt.close()
+
 
 def print_comparative(amount: str):
     # Create a Matplotlib figure and axis
@@ -160,6 +175,8 @@ def print_comparative(amount: str):
     # Show the plot
     plt.grid(True)
     st.pyplot(plt)
+
+    plt.close()
 
 
 st.header("Resultados")
@@ -189,18 +206,16 @@ st.markdown(
     """
 )
 
+st.title("Selection Sort")
 st.title("C")
 
 st.subheader("Cenário 1:")
-
 print_chart(c)
 
 st.subheader("Cenário 2:")
-
 print_chart(c_inverse)
 
 st.subheader("Cenário 3:")
-
 print_chart(c_almost_sorted)
 
 st.title("Java")
@@ -232,6 +247,87 @@ print_chart(typescript_inverse)
 
 st.subheader("Cenário 3:")
 print_chart(typescript_almost_sorted)
+
+
+st.title("Quick Sort")
+st.subheader("Cenário 1:")
+print_chart(c_quick)
+
+st.subheader("Cenário 2:")
+print_chart(c_quick_inverse)
+
+st.subheader("Cenário 3:")
+print_chart(c_quick_almost_sorted)
+
+st.title("Java")
+st.subheader("Cenário 1:")
+print_chart(java_quick)
+
+st.subheader("Cenário 2:")
+print_chart(java_quick_inverse)
+
+st.subheader("Cenário 3:")
+print_chart(java_quick_almost_sorted)
+
+st.title("Python")
+st.subheader("Cenário 1:")
+print_chart(python_quick)
+
+st.subheader("Cenário 2:")
+print_chart(python_quick_inverse)
+
+st.subheader("Cenário 3:")
+print_chart(python_quick_almost_sorted)
+
+st.title("Typescript")
+st.subheader("Cenário 1:")
+print_chart(type_quick)
+
+st.subheader("Cenário 2:")
+print_chart(type_quick_inverse)
+
+st.subheader("Cenário 3:")
+print_chart(type_quick_almost_sorted)
+
+st.title("Counting Sort")
+st.subheader("Cenário 1:")
+print_chart(c_counting)
+
+st.subheader("Cenário 2:")
+print_chart(c_counting_inverse)
+
+st.subheader("Cenário 3:")
+print_chart(c_counting_almost_sorted)
+
+st.title("Java")
+st.subheader("Cenário 1:")
+print_chart(java_counting)
+
+st.subheader("Cenário 2:")
+print_chart(java_counting_inverse)
+
+st.subheader("Cenário 3:")
+print_chart(java_counting_almost_sorted)
+
+st.title("Python")
+st.subheader("Cenário 1:")
+print_chart(python_counting)
+
+st.subheader("Cenário 2:")
+print_chart(python_counting_inverse)
+
+st.subheader("Cenário 3:")
+print_chart(python_counting_almost_sorted)
+
+st.title("Typescript")
+st.subheader("Cenário 1:")
+print_chart(type_counting)
+
+st.subheader("Cenário 2:")
+print_chart(type_counting_inverse)
+
+st.subheader("Cenário 3:")
+print_chart(type_counting_almost_sorted)
 
 st.title("Comparativo")
 
